@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">500PXAND2016SZ</string>
+    <string name="io_exception">Exception while reading photos</string>
+    <string name="server_exception">An error occurred while reading photo stream</string>
+    <string name="no_internet">No Internet access</string>
+    <string name="name">Title:</string>
+    <string name="description">Description:</string>
+    <string name="camera">Camera:</string>
+    <string name="photoDescription">500px photo preview</string>
+    <string name="category">Category:</string>
+    <string name="iso">ISO:</string>
+    <string name="shutterSpeed">Shutter Speed:</string>
+    <string name="focal_length">Focal Length:</string>
+    <string name="aperture">Aperture:</string>
+    <string name="popular">Popular</string>
+    <string name="highest_rated">Highest rated</string>
+    <string name="fresh">Fresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="results_per_page">Results per page:</string>
+    <string name="hide_nsfw">Hide NSFW</string>
+    <string name="personalize_categories">Personalize categories:</string>
+    <string name="upvotes">"Upvotes: "</string>
+</resources>
