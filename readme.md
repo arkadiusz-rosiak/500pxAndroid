@@ -15,6 +15,6 @@ Finally in settings you can change results per page and categories to display.
 Target SDK is **24 (Android 7.0)** and min SDK is **21 (Android 5.0)**
 
 ## In action screenshots
-(http://i.imgur.com/ThUARCs.jpg "Photos list")
-(http://i.imgur.com/o7IAzuD.jpg "Details")
-(http://i.imgur.com/Qpy8OBP.jpg "Settings")
+* [Photos list](http://i.imgur.com/ThUARCs.jpg "Photos list")
+* [Details](http://i.imgur.com/o7IAzuD.jpg "Details")
+* [Settings](http://i.imgur.com/Qpy8OBP.jpg "Settings")
