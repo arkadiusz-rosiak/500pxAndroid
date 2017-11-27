@@ -29,7 +29,7 @@ public class OnlineActivity extends AppCompatActivity {
 
     protected SharedPreferences preferences;
 
-    protected Set<Long> favourites = new HashSet<>();
+    protected static Set<Long> favourites = new HashSet<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,11 +58,10 @@ public class OnlineActivity extends AppCompatActivity {
     }
 
     protected boolean isFavourite(long photoId) {
-        synchronized (favourites) {
-            if (favourites.isEmpty() && isOnline()) {
-                downloadFavourites();
-            }
+        if (favourites.isEmpty() && isOnline()) {
+            downloadFavourites();
         }
+
         return favourites.contains(photoId);
     }
 

@@ -48,9 +48,59 @@ public class PhotoDetailsActivity extends OnlineActivity {
             }
         });
 
+        findViewById(R.id.action_favourite_remove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFromFavourites(id);
+            }
+        });
+
         checkIfFavourite(id);
         prepareActionBar(name);
         downloadAndShowPhoto(id);
+    }
+
+    private void removeFromFavourites(long photoId) {
+        int uid = preferences.getInt("uid", 0);
+        if (isLoggedIn() && uid > 0 && isOnline()) {
+            String token = preferences.getString("auth_token", "");
+            String url = "http://vps2.rosiak.it:8080/favourites/" + uid;
+            doRemoveFromFavourites(url, token, photoId);
+
+        } else if (!isLoggedIn()) {
+            showToast(R.string.fill_account_credentials);
+        } else if (!isOnline()) {
+            showToast(R.string.no_internet);
+        }
+    }
+
+    private void doRemoveFromFavourites(final String url, final String token, final long photoId) {
+        Thread postThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    NetworkRequest networkRequest = new NetworkRequest(url+"?photoId="+photoId, "DELETE");
+                    networkRequest.addAuthToken(token);
+                    String result = networkRequest.execute();
+                    if (result.equals("200")) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                favourites.remove(photoId);
+                                checkIfFavourite(photoId);
+                            }
+                        });
+                    } else {
+                        showToast(R.string.something_went_wrong);
+                    }
+                } catch (Exception e) {
+                    showToast(R.string.something_went_wrong);
+                    Log.wtf("TAG", e);
+                }
+            }
+        });
+
+        postThread.start();
     }
 
     private void checkIfFavourite(long id) {
@@ -92,6 +142,7 @@ public class PhotoDetailsActivity extends OnlineActivity {
                             @Override
                             public void run() {
                                 favourites.add(photoId);
+                                findViewById(R.id.action_favourite).setEnabled(false);
                                 checkIfFavourite(photoId);
                             }
                         });
