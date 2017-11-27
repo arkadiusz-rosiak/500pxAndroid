@@ -3,18 +3,13 @@ package pl.rosiakit.px500;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 import pl.rosiakit.px500.utils.NetworkRequest;
 
@@ -58,7 +53,7 @@ public class AccountActivity extends OnlineActivity {
     }
 
     private void doLogout() {
-        saveTokenToPreferences("");
+        saveUIDAndTokenToPreferences(0, "");
         showToast(R.string.logout_success);
         showAppropriateViews();
     }
@@ -89,8 +84,14 @@ public class AccountActivity extends OnlineActivity {
                         JSONObject photosObject = new JSONObject(result);
                         if(photosObject.getInt("code") == 200) {
                             String token = photosObject.getString("msg");
-                            saveTokenToPreferences(token);
-                            showAppropriateViews();
+                            int uid = 1; //photosObject.getInt("uid");
+                            saveUIDAndTokenToPreferences(uid, token);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showAppropriateViews();
+                                }
+                            });
                         }
                         else {
                             showToast(R.string.something_went_wrong);
@@ -108,9 +109,10 @@ public class AccountActivity extends OnlineActivity {
         }
     }
 
-    private synchronized void saveTokenToPreferences(String token) {
+    private synchronized void saveUIDAndTokenToPreferences(int uid, String token) {
 
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("uid", uid);
         editor.putString("auth_token", token);
         editor.commit();
     }

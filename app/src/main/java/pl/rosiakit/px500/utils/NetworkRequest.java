@@ -2,6 +2,8 @@ package pl.rosiakit.px500.utils;
 
 import android.support.annotation.NonNull;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,6 +25,7 @@ public class NetworkRequest {
     private final String url;
     private final String method;
     private final Map<String, String> params = new HashMap<>();
+    private String token = "";
 
     public NetworkRequest(String url, String method) {
         this.url = url;
@@ -43,6 +46,10 @@ public class NetworkRequest {
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod(method);
             conn.setDoInput(true);
+
+            if(StringUtils.isNotBlank(token)) {
+                conn.addRequestProperty("Authorization", "Bearer " + token);
+            }
 
             if(method.equalsIgnoreCase("post")) {
                 OutputStream out = new BufferedOutputStream(conn.getOutputStream());
@@ -87,5 +94,9 @@ public class NetworkRequest {
             sb.append(param.getKey()).append('=').append(param.getValue()).append('&');
         }
         return sb.toString();
+    }
+
+    public void addAuthToken(String token) {
+        this.token = token;
     }
 }

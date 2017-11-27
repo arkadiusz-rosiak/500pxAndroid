@@ -68,6 +68,8 @@ public class PhotosListActivity extends OnlineActivity {
             }
         });
 
+        toggleFavButton();
+
         initializeGrid();
         showPhotos("popular");
     }
@@ -261,5 +263,15 @@ public class PhotosListActivity extends OnlineActivity {
             refreshPhotos(feature);
         }
 
+        toggleFavButton();
+
+    }
+
+    private void toggleFavButton() {
+        if(!isLoggedIn()) {
+            findViewById(R.id.button_fav).setVisibility(View.INVISIBLE);
+        } else {
+            findViewById(R.id.button_fav).setVisibility(View.VISIBLE);
+        }
     }
 }

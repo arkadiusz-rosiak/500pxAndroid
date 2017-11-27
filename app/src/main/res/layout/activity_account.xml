@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/password"
                 android:textAlignment="textEnd"
                 android:textStyle="normal|bold" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Sing in"
+            android:text="@string/sign_in"
             android:textColor="#ffffff" />
     </LinearLayout>
 
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Auth token:"
+                android:text="@string/auth_token"
                 android:textAlignment="textEnd"
                 android:textStyle="normal|bold" />
 
@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Sing out"
+            android:text="@string/sign_out"
             android:textColor="#ffffff" />
 
     </LinearLayout>
