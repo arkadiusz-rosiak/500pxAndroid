@@ -28,6 +28,12 @@
             android:text="@string/fresh"
             android:id="@+id/button_fresh" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fav"
+            android:id="@+id/button_fav" />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"

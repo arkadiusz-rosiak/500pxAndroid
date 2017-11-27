@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_account"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="pl.rosiakit.px500.AccountActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/login_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fieldMarginTop"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textAlignment="textEnd"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/account_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:inputType="text"
+                android:paddingEnd="@dimen/fieldPaddingEnd"
+                android:paddingStart="@dimen/fieldPaddingStart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fieldMarginTop"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textAlignment="textEnd"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/account_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:inputType="textPassword"
+                android:paddingEnd="@dimen/fieldPaddingEnd"
+                android:paddingStart="@dimen/fieldPaddingStart" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/action_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Sing in"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/auth_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fieldMarginTop"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Auth token:"
+                android:textAlignment="textEnd"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/auth_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:editable="false"
+                android:paddingEnd="@dimen/fieldPaddingEnd"
+                android:paddingStart="@dimen/fieldPaddingStart" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/action_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Sing out"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+</LinearLayout>

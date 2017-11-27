@@ -28,6 +28,7 @@ public class PhotosListActivity extends OnlineActivity {
 
     private static final String TAG = "500PX";
     public static final int REQUEST_CHANE_SETTINGS = 1;
+    public static final int REQUEST_ACCOUNT = 2;
 
     private Handler handler;
     private PhotosAdapter adapter;
@@ -237,6 +238,15 @@ public class PhotosListActivity extends OnlineActivity {
 
                 return true;
             }
+
+            case R.id.action_account: {
+
+                Intent i = new Intent(this, AccountActivity.class);
+                startActivityForResult(i, REQUEST_ACCOUNT);
+
+                return true;
+            }
+
             default: {
                 return super.onOptionsItemSelected(item);
             }
