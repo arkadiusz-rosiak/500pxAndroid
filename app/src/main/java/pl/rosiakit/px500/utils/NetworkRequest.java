@@ -36,7 +36,7 @@ public class NetworkRequest {
         params.put(key, value);
     }
 
-    public String execute() throws IOException {
+    public String execute() throws IOException, UserNotAuthorizedException {
         InputStream is = null;
 
         try {
@@ -61,6 +61,11 @@ public class NetworkRequest {
             }
 
             conn.connect();
+
+            if(conn.getResponseCode() == 401){
+                throw new UserNotAuthorizedException();
+            }
+
             is = conn.getInputStream();
 
             return readStream(is);

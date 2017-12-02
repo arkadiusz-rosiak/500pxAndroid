@@ -1,7 +1,10 @@
 package pl.rosiakit.px500;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.security.keystore.UserNotAuthenticatedException;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +25,7 @@ import pl.rosiakit.px500.provider.NetworkPhotosProvider;
 import pl.rosiakit.px500.provider.OnSinglePhotoDownloadedListener;
 import pl.rosiakit.px500.provider.PhotosProvider;
 import pl.rosiakit.px500.utils.NetworkRequest;
+import pl.rosiakit.px500.utils.UserNotAuthorizedException;
 
 public class PhotoDetailsActivity extends OnlineActivity {
 
@@ -32,10 +36,13 @@ public class PhotoDetailsActivity extends OnlineActivity {
 
     private Photo photo;
 
+    private Context myContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_details);
+        myContext = this;
 
         Intent i = getIntent();
         final int id = (int) i.getExtras().getSerializable(PHOTO_ID_INTENT_KEY);
@@ -149,13 +156,32 @@ public class PhotoDetailsActivity extends OnlineActivity {
                     } else {
                         showToast(R.string.something_went_wrong);
                     }
-                } catch (Exception e) {
+                }
+                catch(UserNotAuthorizedException e) {
+                    showLoginScreen();
+                }
+                catch (Exception e) {
                     showToast(R.string.something_went_wrong);
                 }
             }
         });
 
         postThread.start();
+    }
+
+    private void showLoginScreen() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove("uid");
+                editor.remove("auth_token");
+                editor.commit();
+
+                Intent i = new Intent(myContext, AccountActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void showPhotoDetails() {

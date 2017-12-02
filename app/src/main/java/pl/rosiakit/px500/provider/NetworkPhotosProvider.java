@@ -39,9 +39,13 @@ public class NetworkPhotosProvider implements PhotosProvider {
     }
 
     private JSONArray getPhotosJSONFromURL(String url) throws IOException, JSONException {
-        String photosRAW = new NetworkRequest(url, "GET").execute();
-        JSONObject photosObject = new JSONObject(photosRAW);
-        return photosObject.getJSONArray("photos");
+        try {
+            String photosRAW = new NetworkRequest(url, "GET").execute();
+            JSONObject photosObject = new JSONObject(photosRAW);
+            return photosObject.getJSONArray("photos");
+        } catch (UserNotAuthorizedException ignored) {
+            return null;
+        }
     }
 
     private List<Photo> parsePhotosList(JSONArray photosArray) throws JSONException {
@@ -92,9 +96,13 @@ public class NetworkPhotosProvider implements PhotosProvider {
     }
 
     private JSONObject getSinglePhotosJSONFromUrl(String url) throws IOException, JSONException {
-        String photosRAW = new NetworkRequest(url, "GET").execute();
-        JSONObject rootObject = new JSONObject(photosRAW);
-        return rootObject.getJSONObject("photo");
+        try {
+            String photosRAW = new NetworkRequest(url, "GET").execute();
+            JSONObject rootObject = new JSONObject(photosRAW);
+            return rootObject.getJSONObject("photo");
+        } catch (UserNotAuthorizedException ignored) {
+            return null;
+        }
     }
 
     private void addDetailsToPhoto(JSONObject photoObj, Photo photo) throws JSONException {
